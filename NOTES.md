@@ -38,3 +38,19 @@ List pods in emojivoto namespace to check the Linkerd proxy. We'll see that the 
 ```
 kubectl get pods -n emojivoto
 ```
+
+## Per-Route Metrics
+To have per-route metrics we have to generate a service profile, we can generate based on OpenAPI spec and protobuf. Here is the command to generate Service Profile based on given OpenAPI spec.
+```
+linkerd profile -n emojivoto --open-api web.swagger web-svc > web-sp.yml
+```
+And here's the command to generate Service Profile based on given protobuf file.
+```
+linkerd profile -n emojivoto --proto Voting.proto voting-svc > voting-sp.yml
+```
+The next step is apply those service profile YAML files with `kubectl apply -f <FILE_NAME>`
+
+To check the metrics of our service using Linkerd viz extension, run this command.
+```
+linkerd viz routes service/web-svc --namespace emojivoto
+```
