@@ -24,3 +24,17 @@ Run this command to check the viz extension status
 ```
 linkerd viz check
 ```
+
+## Add Linkerd to our services in Kubernetes
+Injecting our service deployments with Linkerd proxy by annotating its namespace.
+```
+kubectl annotate ns emojivoto linkerd.io/inject=enabled
+```
+Restart the deployments in emojivoto namespace
+```
+kubectl rollout restart deploy -n emojivoto
+```
+List pods in emojivoto namespace to check the Linkerd proxy. We'll see that the number of container in each pod is increased from 1 to 2.
+```
+kubectl get pods -n emojivoto
+```
