@@ -19,3 +19,8 @@ To help us to have metrics and visibility of Linkerd on Kubernetes cluster, we c
 ```
 linkerd viz install | kubectl apply -f -
 ```
+
+Run this command to check the viz extension status
+```
+linkerd viz check
+```
